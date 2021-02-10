@@ -1,0 +1,88 @@
+.productlist {
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  list-style: none;
+}
+
+.productlist li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.productlist li img {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  max-width: 250px;
+  border-radius: 4px;
+}
+
+.productlist li > strong {
+  font-size: 22px;
+  line-height: 20px;
+  color: #333;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.productlist li > span {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 5px 0 20px;
+  text-align: center;
+}
+
+.productlist li button {
+  background: #7159c1;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.productlist li button:hover {
+  background: rgba(113, 89, 193, 0.9);
+  -webkit-transition: background 250ms linear;
+  transition: background 250ms linear;
+}
+
+.productlist li button div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.productlist li button div svg {
+  margin-right: 5px;
+}
+
+.productlist li button span {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  font-weight: bold;
+}
+/*# sourceMappingURL=styles.css.map */
