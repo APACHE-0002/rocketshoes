@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .productlist {
   display: -ms-grid;
   display: grid;
@@ -17,6 +18,7 @@
   background: #fff;
   border-radius: 4px;
   padding: 20px;
+  /* > serve para direcionar que o span a alterar é somente aquele este da li, mesmo que tiver outros*/
 }
 
 .productlist li img {
@@ -55,6 +57,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  /* flex 1 para ocupar o maximo de espaço possivel*/
 }
 
 .productlist li button:hover {
