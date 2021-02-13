@@ -1,91 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import{ MdAddShoppingCart } from 'react-icons/md';
+import api from '../../services/api';
 
 import nike from '../../assets/nike.jpg';
 
 import './styles.css';
 
-export default function Home(){
-    return(
-        <ul className="productlist">
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
+export default class Home extends Component {
+    state = {
+        products: [],
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
+    }
 
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
+    async componentDidMount(){
+        const response = await api.get('products');
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
+        this.setState({ products: response.data })
+    }
 
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
+    render(){
+        const { products } = this.state;
 
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
-
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
-
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
-
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-            <li>
-                <img src={nike} alt="Tênis"/>
-                <strong>Tenis muito bom</strong>
-                <span>R$ 129,90</span>
-
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#FFF"/> 3
-                    </div>
-
-                    <span>ADICIONAR AO CARRINHO</span>
-                </button>
-            </li>
-        </ul>
-    )
+        return(
+            <ul className="productlist">
+                {products.map(product => (
+                    <li key={product.id}>
+                    <img src={product.image} alt="Tênis"/>
+                    <strong>{product.title}</strong>
+                    <span>R$ {product.price}</span>
+    
+                    <button type="button">
+                        <div>
+                            <MdAddShoppingCart size={16} color="#FFF"/> 3
+                        </div>
+    
+                        <span>ADICIONAR AO CARRINHO</span>
+                    </button>
+                </li>
+                ) )}
+                
+            </ul>
+        )
+    }
 }
