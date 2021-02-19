@@ -37,7 +37,7 @@ export default function cart(state = [], action){
         });
         case 'REMOVE_AMOUNT':
             return produce(state, draft =>{
-                
+
                 const productIndex = draft.findIndex(p => p.id === action.product.id);
                 const log = draft[productIndex].amount;
 

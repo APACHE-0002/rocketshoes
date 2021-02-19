@@ -13,6 +13,7 @@ class Home extends Component {
     }
 
     async componentDidMount(){
+        //primeira busca da api para ser enviada ao store
         const response = await api.get('products');
 
         const data = response.data.map(product => ({
@@ -76,6 +77,7 @@ class Home extends Component {
 
 
 export default connect(state => ({
+    // colocando quantidade em cada um dos produtos
     amount: state.cart.reduce((amount, product) => {
             amount[product.id] = product.amount;
 
