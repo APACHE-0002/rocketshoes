@@ -1,11 +1,26 @@
 import React from 'react';
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
-
-import nike from '../../assets/nike.jpg'
+import {connect} from 'react-redux';
+import { formatPrice } from '../../util/format';
 
 import './styles.css';
 
-export default function Cart(){
+
+function Cart({products, total, dispatch}){
+    function increment(product){
+        dispatch({
+            type: 'ADD_AMOUNT',
+            product,
+        });
+    }
+    
+    function decrement(product){
+        dispatch({
+            type: 'REMOVE_AMOUNT',
+            product,
+        });
+    }
+
     return(
         <div className="content">
             <table>
@@ -19,34 +34,45 @@ export default function Cart(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <img src={nike} alt="tenis"/>
+                {products.length > 0 ? products.map(product => (
+                    <tr key={product.id}>
+                            <td>
+                            <img src={product.image} alt="tenis"/>
                         </td>
                         <td>
-                            <strong>Tênis muito massa</strong>
-                            <span>R$ 129,90</span>
+                            <strong>{product.title}</strong>
+                            <span>{product.priceFormatted}</span>
                         </td>
                         <td>
                             <div>
-                                <button type="button">
+                                <button type="button" onClick={() => decrement(product)}>
                                     <MdRemoveCircleOutline size={20} color="#7159c1"/>
                                 </button>
-                                <input type="number" readOnly value={2} />
-                                <button type="button">
+                                <input type="number" readOnly value={product.amount} />
+                                <button type="button" onClick={() => increment(product)}>
                                     <MdAddCircleOutline size={20} color="#7159c1"/>
                                 </button>
                             </div>
                         </td>
                         <td>
-                            <strong>R$ 258,80</strong>
+                            <strong>{product.subtotal}</strong>
                         </td>
                         <td>
-                            <button type="button">
+                            {/* funçao onclick, onde quando apertar, ira pegar o id do componente,
+                            procurar no redux e remove-lo
+                            chegar no redux
+                            -onclick, enviando type REMOVE_TO_CART, e o id para o redux cart,
+                            no reducer remover o id enviado.                                
+                            */}
+
+                            <button type="button" onClick={() => dispatch({ type: 'REMOVE_TO_CART', id: product.id })}>
                                 <MdDelete size={20} color="#7159c1" />
                             </button>
                         </td>
                     </tr>
+                        )) : ''}
+
+                 
                 </tbody>
             </table>
 
@@ -55,9 +81,19 @@ export default function Cart(){
 
                 <total>
                     <span>TOTAL</span>
-                    <strong>R$ 1920,28</strong>
+                    <strong>{total}</strong>
                 </total>
             </footer>
         </div>
     )
 }
+
+export default connect(state => ({
+    products: state.cart.map(product => ({
+        ...product,
+        subtotal: formatPrice(product.price * product.amount),
+    })),
+    total: formatPrice(state.cart.reduce((total, product) =>{
+        return total + product.price * product.amount;
+    }, 0)),
+}))(Cart);
