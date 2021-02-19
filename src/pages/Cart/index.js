@@ -7,13 +7,15 @@ import './styles.css';
 
 
 function Cart({products, total, dispatch}){
+    //adicionar quantidade em produto
     function increment(product){
         dispatch({
             type: 'ADD_AMOUNT',
             product,
         });
     }
-    
+
+    //remover quantidade em produto
     function decrement(product){
         dispatch({
             type: 'REMOVE_AMOUNT',
@@ -89,10 +91,12 @@ function Cart({products, total, dispatch}){
 }
 
 export default connect(state => ({
+    //somar o subtotal de cada item do carrinho
     products: state.cart.map(product => ({
         ...product,
         subtotal: formatPrice(product.price * product.amount),
     })),
+    //somar o total de todos os itens do carrinho
     total: formatPrice(state.cart.reduce((total, product) =>{
         return total + product.price * product.amount;
     }, 0)),

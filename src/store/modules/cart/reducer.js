@@ -3,6 +3,7 @@ import produce from 'immer';
 export default function cart(state = [], action){
 
     switch (action.type){
+        //adicionar ao carrinho
         case 'ADD_TO_CART':
             return produce(state, draft => {
                 const productIndex = draft.findIndex(p => p.id === action.product.id);
@@ -20,6 +21,7 @@ export default function cart(state = [], action){
                 });
             }
             });
+            //excluir do carrinho
         case 'REMOVE_TO_CART':
             return produce(state, draft =>{
                 const productIndex = draft.findIndex(p => p.id === action.id);
@@ -28,6 +30,7 @@ export default function cart(state = [], action){
                     draft.splice(productIndex, 1);
                 }
             });
+            //adicionar quantidade
         case 'ADD_AMOUNT':
             return produce(state, draft =>{
 
@@ -35,12 +38,14 @@ export default function cart(state = [], action){
                 draft[productIndex].amount += 1;
 
         });
+            //subtrair quantidade
         case 'REMOVE_AMOUNT':
             return produce(state, draft =>{
 
                 const productIndex = draft.findIndex(p => p.id === action.product.id);
                 const log = draft[productIndex].amount;
 
+                //subtrair caso nao seja 1
                 if(log <= 1){
                     draft[productIndex].amount = 1;
                 }
