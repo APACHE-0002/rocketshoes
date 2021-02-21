@@ -7,20 +7,20 @@ além de obter em tempo real o valor total e dos produtos; Toda estilização do
 
 ![img](https://user-images.githubusercontent.com/48190578/108611043-49d87a80-73b9-11eb-9da7-a21f96125843.png)
 
-## 👨‍💻 Tecnologies
+## 👨‍💻 Tecnologias
 
-  In these project was used the tecnologies above:
+  Neste Projeto Foram Utilizadas Estas Tecnologias:
 
   - [React](https://reactjs.org/) 
   - [Redux](https://redux.js.org)
   - [Sass](https://sass-lang.com)  
 
 
-## 🏃‍♀️ How run project
+## 🏃‍♀️ Como Rodar O Projeto:
 
-  1. clone these project using above commands:
+  1. clone este repositorio utilizando os comandos:
   
-   - First clone repository
+   - clone o repositorio com:
 
   ```
     git clone https://github.com/APACHE-0002/rocketshoes
